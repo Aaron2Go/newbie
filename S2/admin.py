@@ -1,5 +1,5 @@
 from django.contrib import admin
-from S2.models import *  # Project, Branch, Stock
+from S2.models import *  # Project, Branch, Stock, TargetFields, ExcelFiles
 
 admin.site.site_header = 'Newbie 数据管理系统'
 admin.site.site_title = 'Newbie'
@@ -37,3 +37,13 @@ class AdviserAdmin(admin.ModelAdmin):
 @admin.register(Posterior)
 class PosteriorAdmin(admin.ModelAdmin):
     list_display = ('ID', 'Name', 'Project')
+
+
+@admin.register(TargetFields)
+class TargetFieldsAdmin(admin.ModelAdmin):
+    list_display = ('ID', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Value', 'Market_Price', 'Market_Value_to_NAV', 'Valuation', 'Status')
+
+
+@admin.register(ExcelFiles)
+class ExcelFilesAdmin(admin.ModelAdmin):
+    list_display = ('Filename', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes')

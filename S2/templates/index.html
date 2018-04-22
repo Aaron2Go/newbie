@@ -1,0 +1,8 @@
+<title>上传文件</title>
+<h1>上传一个Excel文件以导入数据</h1>
+<form method = "post" action = "UploadExcelFile" enctype = "multipart/form-data">
+    {% csrf_token %}
+    <input type = "file" name = "excel_file" />
+    <br />
+    <input type = "submit" name = "submit_file" />
+</form>

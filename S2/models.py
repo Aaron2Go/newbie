@@ -1,7 +1,5 @@
 from django.db import models
 
-
-# Create your models here.
 class Branch(models.Model):
     Name = models.CharField(max_length=10, primary_key=True, unique=True, verbose_name='经营机构')
     Area = models.CharField(max_length=10, verbose_name='地域')
@@ -81,3 +79,34 @@ class Posterior(models.Model):
     class Meta:
         verbose_name = "劣后级"
         verbose_name_plural = "劣后级"
+
+
+class TargetFields(models.Model):
+    ID = models.CharField(max_length = 10, verbose_name = '编号', primary_key = True, unique = True)
+    Name = models.CharField(max_length = 50, verbose_name = '名称')
+    Holdings = models.IntegerField(verbose_name = '持股数量')
+    Purchase_Price = models.FloatField(verbose_name = '成本价')
+    Costs = models.FloatField(verbose_name = '成本')
+    Cost_to_NAV = models.FloatField(verbose_name = '成本占净值比例(%)')
+    Market_Price = models.FloatField(verbose_name = '收盘价')
+    Market_Value = models.FloatField(verbose_name = '市值')
+    Market_Value_to_NAV = models.FloatField(verbose_name = '市值占净值比例(%)')
+    Valuation = models.FloatField(verbose_name = '估值')
+    Status = models.CharField(max_length = 10, verbose_name = '交易状态')
+
+    class Meta:
+        verbose_name = 'Excel数据'
+        verbose_name_plural = 'Excel数据'
+
+
+class ExcelFiles(models.Model):
+    Filename = models.CharField(max_length = 50, verbose_name = '文件名称')
+    File = models.FileField(upload_to = 'excelfiles/')
+    FileType = models.CharField(max_length = 10, verbose_name = '文件类型')
+    UploadedDateTime = models.DateTimeField(verbose_name = '上传时间', auto_now = True)
+    LastModifiedDateTime = models.DateTimeField(verbose_name = '上次修改时间')
+    ModifiedTimes = models.IntegerField(verbose_name = '修改次数')
+
+    class Meta:
+        verbose_name = 'Excel文件'
+        verbose_name_plural = 'Excel文件'
