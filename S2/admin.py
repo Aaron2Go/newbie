@@ -46,4 +46,4 @@ class TargetFieldsAdmin(admin.ModelAdmin):
 
 @admin.register(ExcelFiles)
 class ExcelFilesAdmin(admin.ModelAdmin):
-    list_display = ('Filename', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes')
+    list_display = ('Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Project')

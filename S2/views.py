@@ -2,19 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from S2.models import * # Project, Branch, Stock, TargetFields, ExcelFiles
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import os
-
-
-def UploadExcelFile(request):
-    if request.method == 'POST':
-        obj = request.FILES.get('excel_file', None)
-        file = open(os.path.join('/excelfiles/', obj.name), 'wb+')
-        for chunk in obj.chunks():
-            file.write(chunk)
-        file.close()
-    return render(request, 'S2/index.html')
 
 
 def FormatDataframe(request):

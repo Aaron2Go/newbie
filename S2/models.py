@@ -101,11 +101,12 @@ class TargetFields(models.Model):
 
 class ExcelFiles(models.Model):
     Filename = models.CharField(max_length = 50, verbose_name = '文件名称')
-    File = models.FileField(upload_to = 'excelfiles/')
+    File = models.FileField(upload_to = '/excelfiles/')
     FileType = models.CharField(max_length = 10, verbose_name = '文件类型')
     UploadedDateTime = models.DateTimeField(verbose_name = '上传时间', auto_now = True)
     LastModifiedDateTime = models.DateTimeField(verbose_name = '上次修改时间')
     ModifiedTimes = models.IntegerField(verbose_name = '修改次数')
+    Project = models.ForeignKey('Project', null = True, blank = True, on_delete = models.SET_NULL, verbose_name = '项目')
 
     class Meta:
         verbose_name = 'Excel文件'
