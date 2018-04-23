@@ -46,4 +46,3 @@ April 24, 2018 - 02:01:41
 Django version 2.0.4, using settings 'newbie.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
-
