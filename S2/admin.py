@@ -18,12 +18,6 @@ class ProjectAdmin(admin.ModelAdmin):
     fk_fields = ('Name',)
 
 
-@admin.register(Stock)
-class StockAdmin(admin.ModelAdmin):
-    list_display = ('Code', 'Name', 'Holdings', 'Market_Price', 'Market_Value', 'Purchase_Price',
-                    'Costs', 'Cost_to_NAV', 'Status')
-
-
 @admin.register(Guarantor)
 class GuarantorAdmin(admin.ModelAdmin):
     list_display = ('ID', 'Name', 'Project')
@@ -41,7 +35,7 @@ class PosteriorAdmin(admin.ModelAdmin):
 
 @admin.register(NavData)
 class NavDataAdmin(admin.ModelAdmin):
-    list_display = ('ID', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Value', 'Market_Price', 'Market_Value_to_NAV', 'Valuation', 'Status')
+    list_display = ('Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Value', 'Market_Price', 'Market_Value_to_NAV', 'Valuation', 'Status')
 
 
 @admin.register(NavFile)
