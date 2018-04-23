@@ -39,11 +39,11 @@ class PosteriorAdmin(admin.ModelAdmin):
     list_display = ('ID', 'Name', 'Project')
 
 
-@admin.register(TargetFields)
-class TargetFieldsAdmin(admin.ModelAdmin):
+@admin.register(NavData)
+class NavDataAdmin(admin.ModelAdmin):
     list_display = ('ID', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Value', 'Market_Price', 'Market_Value_to_NAV', 'Valuation', 'Status')
 
 
-@admin.register(ExcelFiles)
-class ExcelFilesAdmin(admin.ModelAdmin):
+@admin.register(NavFile)
+class NavFileAdmin(admin.ModelAdmin):
     list_display = ('Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Project')
