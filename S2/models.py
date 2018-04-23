@@ -81,9 +81,9 @@ class Posterior(models.Model):
 
 class NavData(models.Model):
     Project = models.ForeignKey('Project', null=True ,blank=True, on_delete=models.SET_NULL, verbose_name='项目')
-    InfoDate = models.DateField(verbose_name='口径日期', primary_key=True)
-    Code = models.CharField(max_length=10, verbose_name='编号', primary_key=True)
-    Name = models.CharField(max_length=50, verbose_name='名称',primary_key=True)
+    InfoDate = models.DateField(verbose_name='口径日期')
+    Code = models.CharField(max_length=10, verbose_name='编号')
+    Name = models.CharField(max_length=50, verbose_name='名称')
     Holdings = models.IntegerField(verbose_name='持股数量')
     Purchase_Price = models.FloatField(verbose_name='成本价')
     Costs = models.FloatField(verbose_name='成本')
