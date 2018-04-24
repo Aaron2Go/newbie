@@ -1,13 +1,12 @@
 # 12 avril 2018
 
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from django.db import models
-from S2.models import NavData, NavFile
+from S2.models import NavData, Branch
+
 
 def format_field_id(s):
     return (''.join(list(filter(str.isdigit, str(s)))))[-6:]
+
 
 def format_field_percentage(s):
     if isinstance(s, str):
@@ -15,14 +14,20 @@ def format_field_percentage(s):
     else:
         return s
 
+
+def format_field_name(s):
+    return s.replace(' ', '')
+
+
 def format_field_status(s):
     if '正常' in s:
         return '正常'
     elif '停牌' in s:
         return '停牌'
 
-def handle_excel_data(file_path):
-    df = pd.read_excel(file_path, sheet_name = 0)
+
+def interpret_stock(file_path):
+    df = pd.read_excel(file_path, sheet_name=0)
     field_row = 0
     target_field_id = '科目代码'
     valid_rows_list = []
@@ -69,12 +74,24 @@ def handle_excel_data(file_path):
         for j in range(0, len(field_list_name)):
             if j == 0:
                 temp_list.append(format_field_id(df.iat[i, field_list_number[j]]))
+            elif j == 1:
+                temp_list.append(format_field_name(df.iat[i, field_list_number[j]]))
             elif j == 10:
                 temp_list.append(format_field_status(df.iat[i, field_list_number[j]]))
             elif j == 5 or j == 8:
                 temp_list.append(format_field_percentage(df.iat[i, field_list_number[j]]))
             else:
                 temp_list.append(df.iat[i, field_list_number[j]])
-        NavData.objects.get_or_create(Code = temp_list[0], Name = temp_list[1], Holdings = temp_list[2], Purchase_Price = temp_list[3], Costs = temp_list[4], Cost_to_NAV = temp_list[5], Market_Price = temp_list[6], Market_Value = temp_list[7], Market_Value_to_NAV = temp_list[8], Valuation = temp_list[9], Status = temp_list[10])
+        NavData.objects.get_or_create(Code=temp_list[0], Name=temp_list[1], Holdings=temp_list[2],
+                                      Purchase_Price=temp_list[3], Costs=temp_list[4], Cost_to_NAV=temp_list[5],
+                                      Market_Price=temp_list[6], Market_Value=temp_list[7],
+                                      Market_Value_to_NAV=temp_list[8], Valuation=temp_list[9], Status=temp_list[10])
         print(temp_list)
         temp_list.clear()
+
+
+def interpret_branch(file_path):
+    df = pd.read_excel(file_path, sheet_name=0)
+    print(df)
+    for i in range(0, len(df)):
+        Branch.objects.get_or_create(Name=df['Name'][i], Area=df['Area'][i])

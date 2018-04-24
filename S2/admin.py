@@ -43,3 +43,7 @@ class NavDataAdmin(admin.ModelAdmin):
 class NavFileAdmin(admin.ModelAdmin):
     # list_display = ('Project', 'InfoDate', 'Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
     list_display = ('Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
+
+@admin.register(PlBranch)
+class PlBranchAdmin(admin.ModelAdmin):
+    pass
