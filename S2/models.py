@@ -80,19 +80,20 @@ class Posterior(models.Model):
 
 
 class NavData(models.Model):
-    Project = models.ForeignKey('Project', null=True ,blank=True, on_delete=models.SET_NULL, verbose_name='项目')
-    InfoDate = models.DateField(verbose_name='口径日期')
+    # Project = models.ForeignKey('Project', null=True ,blank=True, on_delete=models.SET_NULL, verbose_name='项目')
+    # InfoDate = models.DateField(verbose_name='口径日期')
     Code = models.CharField(max_length=10, verbose_name='编号')
     Name = models.CharField(max_length=50, verbose_name='名称')
-    Holdings = models.IntegerField(verbose_name='持股数量')
-    Purchase_Price = models.FloatField(verbose_name='成本价')
-    Costs = models.FloatField(verbose_name='成本')
-    Cost_to_NAV = models.FloatField(verbose_name='成本占净值比例(%)')
-    Market_Price = models.FloatField(verbose_name='收盘价')
-    Market_Value = models.FloatField(verbose_name='市值')
-    Market_Value_to_NAV = models.FloatField(verbose_name='市值占净值比例(%)')
-    Valuation = models.FloatField(verbose_name='估值')
-    Status = models.CharField(max_length=10, verbose_name='交易状态')
+    Holdings = models.IntegerField(verbose_name='持股数量', null = True)
+    Purchase_Price = models.FloatField(verbose_name='成本价', null = True)
+    Costs = models.FloatField(verbose_name='成本', null = True)
+    Cost_to_NAV = models.FloatField(verbose_name='成本占净值比例(%)', null = True)
+    Market_Price = models.FloatField(verbose_name='收盘价', null = True)
+    Market_Value = models.FloatField(verbose_name='市值', null = True)
+    Market_Value_to_NAV = models.FloatField(verbose_name='市值占净值比例(%)', null = True)
+    Valuation = models.FloatField(verbose_name='估值', null = True)
+    Status = models.CharField(max_length=10, verbose_name='交易状态', null = True)
+    objects = models.Manager()
 
     def __str__(self):
         return self.Name + "(" + self.Code + ")"
@@ -103,19 +104,25 @@ class NavData(models.Model):
 
 
 class NavFile(models.Model):
-    Project = models.ForeignKey('Project',null=True , blank=True, on_delete=models.SET_NULL, verbose_name='项目')
-    InfoDate = models.DateField(verbose_name='口径日期', primary_key=True)
+    # Project = models.ForeignKey('Project',null=True , blank=True, on_delete=models.SET_NULL, verbose_name='项目')
+    # InfoDate = models.DateField(verbose_name='口径日期', primary_key=True)
     Filename = models.CharField(max_length=50, verbose_name='文件名称')
     File = models.FileField(upload_to='Nav_Tables', verbose_name='数据文件')
     FileType = models.CharField(max_length=10, verbose_name='文件类型')
+<<<<<<< HEAD
     UploadedDateTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
+=======
+    UploadedDateTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, primary_key = True)
+>>>>>>> b6270b3e89966c25abb55f1b3e041a61f05db296
     LastModifiedDateTime = models.DateTimeField(verbose_name='上次修改时间')
     ModifiedTimes = models.IntegerField(verbose_name='修改次数')
     Comments = models.TextField(verbose_name='备注')
+    objects = models.Manager()
 
     def __str__(self):
-        return self.Project.Name + "(" + str(self.InfoDate) + ")"
+        return "(" + str(self.UploadedDateTime) + ")"
 
     class Meta:
         verbose_name = '净值表'
         verbose_name_plural = '净值表'
+

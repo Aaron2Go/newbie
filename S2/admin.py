@@ -1,5 +1,5 @@
 from django.contrib import admin
-from S2.models import *  # Project, Branch, Stock, TargetFields, ExcelFiles
+from S2.models import *  # Project, Branch, Stock
 
 admin.site.site_header = 'Newbie 数据管理系统'
 admin.site.site_title = 'Newbie'
@@ -35,9 +35,11 @@ class PosteriorAdmin(admin.ModelAdmin):
 
 @admin.register(NavData)
 class NavDataAdmin(admin.ModelAdmin):
-    list_display = ('Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Value', 'Market_Price', 'Market_Value_to_NAV', 'Valuation', 'Status')
+    # list_display = ('Project', 'InfoDate', 'Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Price', 'Market_Value', 'Market_Value_to_NAV', 'Valuation', 'Status')
+    list_display = ('Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Price', 'Market_Value', 'Market_Value_to_NAV', 'Valuation', 'Status')
 
 
 @admin.register(NavFile)
 class NavFileAdmin(admin.ModelAdmin):
-    list_display = ('Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Project')
+    # list_display = ('Project', 'InfoDate', 'Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
+    list_display = ('Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
