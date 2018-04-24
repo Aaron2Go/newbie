@@ -1,8 +1,8 @@
 from django.contrib import admin
 from S2.models import *  # Project, Branch, Stock
 
-admin.site.site_header = 'Newbie 数据管理系统'
-admin.site.site_title = 'Newbie'
+admin.site.site_header = '底仓监控系统'
+admin.site.site_title = '底仓监控系统'
 
 
 # Register your models here.
@@ -39,11 +39,3 @@ class NavDataAdmin(admin.ModelAdmin):
     list_display = ('Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Price', 'Market_Value', 'Market_Value_to_NAV', 'Valuation', 'Status')
 
 
-@admin.register(NavFile)
-class NavFileAdmin(admin.ModelAdmin):
-    # list_display = ('Project', 'InfoDate', 'Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
-    list_display = ('Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
-
-@admin.register(PlBranch)
-class PlBranchAdmin(admin.ModelAdmin):
-    pass

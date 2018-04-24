@@ -17,13 +17,13 @@ class Branch(models.Model):
 class Project(models.Model):
     ID = models.CharField(max_length=10, verbose_name='编号', primary_key=True, unique=True)
     Name = models.CharField(max_length=50, verbose_name='名称')
-    Branch = models.ForeignKey("Branch", null=True, blank=True, on_delete=models.SET_NULL,
+    Branch = models.ForeignKey("Branch", null=True, on_delete=models.SET_NULL,
                                verbose_name='经营机构')
     Project_Type = (
-        ('Z', '直投类'),
-        ('P', '配资类'),
+        ('直投类', '直投类'),
+        ('配资类', '配资类'),
     )
-    Type = models.CharField(max_length=1, choices=Project_Type, verbose_name='类型')
+    Type = models.CharField(max_length=10,choices=Project_Type, verbose_name='类型')
     Approval_Form_Num = models.CharField(max_length=150, verbose_name='审批单号')
     Issue_Date = models.DateField(verbose_name='发行日期')
     Duration = models.IntegerField(verbose_name='期限')
@@ -103,35 +103,3 @@ class NavData(models.Model):
         verbose_name = 'A股持仓'
         verbose_name_plural = 'A股持仓'
 
-
-class NavFile(models.Model):
-    # Project = models.ForeignKey('Project',null=True , blank=True, on_delete=models.SET_NULL, verbose_name='项目')
-    # InfoDate = models.DateField(verbose_name='口径日期', primary_key=True)
-    Filename = models.CharField(max_length=50, verbose_name='文件名称')
-    File = models.FileField(upload_to='Nav_Tables', verbose_name='数据文件')
-    FileType = models.CharField(max_length=10, verbose_name='文件类型')
-    UploadedDateTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
-    LastModifiedDateTime = models.DateTimeField(verbose_name='上次修改时间')
-    ModifiedTimes = models.IntegerField(verbose_name='修改次数')
-    Comments = models.TextField(verbose_name='备注')
-    objects = models.Manager()
-
-    def __str__(self):
-        return "(" + str(self.UploadedDateTime) + ")"
-
-    class Meta:
-        verbose_name = '净值表'
-        verbose_name_plural = '净值表'
-
-
-class PlBranch(models.Model):
-    File = models.FileField(upload_to='Pl\Branch', verbose_name='数据文件')
-    UploadedDateTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
-    objects = models.Manager()
-
-    def __str__(self):
-        return "(" + str(self.File) + ")"
-
-    class Meta:
-        verbose_name = '经营机构批量导入'
-        verbose_name_plural = '经营机构批量导入'
