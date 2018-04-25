@@ -27,9 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+#SUIT = True
 # Application definition
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,9 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'S3',
     'S2',
-    'S1'
+    'S1',
+    #'suit_dashboard',
 ]
-
+#if SUIT:  # add suit and replace admin with SimpleAdminConfig
+#    INSTALLED_APPS = [
+#        'suit',
+#        'django.contrib.admin.apps.SimpleAdminConfig'
+#    ] + INSTALLED_APPS[2:]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +72,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'S2'
             ],
         },
     },
@@ -118,8 +123,23 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_FORMAT = 'Y-m-d H:i:s'
+
+DATE_FORMAT = 'Y-m-d'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/Static/'
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': '底仓监控系统',
+    'HEADER_DATE_FORMAT': '',
+    'HEADER_TIME_FORMAT': 'H:i',
+    'SHOW_REQUIRED_ASTERISK': True,
+    'CONFIRM_UNSAVED_CHANGES': True,
+    'MENU_OPEN_FIRST_CHILD': True,
+    # 每一个字典表示左侧菜单的一栏
+    # label表示name，app表示上边的install的app，models表示用了哪些models
+}

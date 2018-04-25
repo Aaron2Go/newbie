@@ -1,8 +1,6 @@
 from django.contrib import admin
 from S2.models import *  # Project, Branch, Stock
 
-admin.site.site_header = '底仓监控系统'
-admin.site.site_title = '底仓监控系统'
 
 
 # Register your models here.
@@ -13,9 +11,9 @@ class BranchAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('ID', 'Name', 'Branch', 'Type', 'Approval_Form_Num', 'Issue_Date', 'Duration', 'Amount',
+    list_display = ('ID', 'Name', 'Branch', 'Type', 'Issue_Date', 'Duration', 'Amount',
                     'Leverage_Ratio')
-    fk_fields = ('Name',)
+    list_filter = ['Branch']
 
 
 @admin.register(Guarantor)

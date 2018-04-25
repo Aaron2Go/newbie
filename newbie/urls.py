@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+#from .site import DashboardSite
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
 ]
+
+#admin.site = DashboardSite()
+#admin.sites.site = admin.site
+#admin.autodiscover()
