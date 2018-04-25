@@ -2,7 +2,7 @@
 Data Management Tool based on Django Admin
 
 # Pre-requesitions
-Python 3; Django 2; Django Suit 0.2
+Python 3; Django 2; Django Suit 0.2; Django Suit Dashboard
 
 pip install django
 
