@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-#from .site import DashboardSite
+
 
 urlpatterns = [
     path('', admin.site.urls),
+    #patterns('', (r'^grappelli/', include('grappelli.urls')), )
+    path(r'^grappelli/', include('grappelli.urls'))
 ]
-
-#admin.site = DashboardSite()
-#admin.sites.site = admin.site
-#admin.autodiscover()
