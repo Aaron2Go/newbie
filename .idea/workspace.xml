@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4e95625-c606-4135-9d30-40d621284e0a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S2/signals.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/css/bootstrap-table-expandable.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/css/dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/js/Chart.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/js/bootstrap-table-expandable.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/js/feather.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/js/jquery-3.3.1.slim.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Static/js/popper.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/newbie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/newbie/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newbie/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/newbie/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/base_site.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,6 +28,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/newbie/settings.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -59,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/S2/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
@@ -108,9 +104,9 @@
         <option value="$PROJECT_DIR$/clear.py" />
         <option value="$PROJECT_DIR$/S3/models.py" />
         <option value="$PROJECT_DIR$/build.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/newbie/settings.py" />
         <option value="$PROJECT_DIR$/newbie/urls.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -141,11 +137,6 @@
             <path>
               <item name="newbie" type="b2602c69:ProjectViewProjectNode" />
               <item name="newbie" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="newbie" type="b2602c69:ProjectViewProjectNode" />
-              <item name="newbie" type="462c0819:PsiDirectoryNode" />
-              <item name="Static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -228,6 +219,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32971507" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5007163" side_tool="true" weight="0.32971507" />
@@ -455,13 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/S1/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -605,6 +590,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>

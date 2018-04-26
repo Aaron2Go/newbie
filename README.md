@@ -3,13 +3,11 @@
 Data Management Tool based on Django Admin
 
 # Pre-requisitions
-Python 3; Django 2; Django Suit 0.2; Django Suit Dashboard
+Python 3; Django 2; Grappelli
 
     pip install django
 
-    pip install django-suit
-
-    pip install django-suit-dashboard
+    pip install grappelli
 
 # Before Push to Github
 Clear your personal data:
