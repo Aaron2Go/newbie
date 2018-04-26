@@ -33,8 +33,8 @@ class PlBranch(models.Model):
 
 
 class PlProject(models.Model):
-    InfoDate = models.DateField(verbose_name='口径日期')
     File = models.FileField(upload_to='Upload\Projects', verbose_name='数据文件')
+    InfoDate = models.DateField(verbose_name='口径日期')
     UploadTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
     Comments = models.TextField(verbose_name='备注', null=True, blank=True)
     objects = models.Manager()

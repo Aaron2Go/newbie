@@ -1,15 +1,15 @@
-newbie
-=======
+# newbie
+
 Data Management Tool based on Django Admin
 
 # Pre-requesitions
 Python 3; Django 2; Django Suit 0.2; Django Suit Dashboard
 
-pip install django
+    pip install django
 
-pip install django-suit
+    pip install django-suit
 
-pip install django-suit-dashboard
+    pip install django-suit-dashboard
 
 # Before Push to Github
 Clear your personal data:
