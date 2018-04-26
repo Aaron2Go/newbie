@@ -16,7 +16,7 @@ class Branch(models.Model):
 
 class Project(models.Model):
     ID = models.CharField(max_length=10, verbose_name='编号', primary_key=True, unique=True)
-    Name = models.CharField(max_length=50, verbose_name='名称')
+    Name = models.CharField(max_length=50, verbose_name='项目名称')
     Branch = models.ForeignKey("Branch", null=True, on_delete=models.SET_NULL,
                                verbose_name='经营机构')
     Project_Type = (
@@ -29,6 +29,7 @@ class Project(models.Model):
     Duration = models.IntegerField(verbose_name='期限')
     Amount = models.IntegerField(verbose_name='金额')
     Leverage_Ratio = models.FloatField(verbose_name='杠杆率')
+    objects = models.Manager()
 
     def __str__(self):
         return "(" + self.ID + ")" + self.Name
@@ -39,10 +40,11 @@ class Project(models.Model):
 
 
 class Guarantor(models.Model):
-    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
-    Name = models.CharField(max_length=20, verbose_name='名称')
     Project = models.ForeignKey("Project", null=True, blank=True, on_delete=models.SET_NULL,
                                 verbose_name='项目')
+    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
+    Name = models.CharField(max_length=20, verbose_name='名称')
+    objects = models.Manager()
 
     def __str__(self):
         return self.Name + "(" + self.ID + ")"
@@ -53,10 +55,11 @@ class Guarantor(models.Model):
 
 
 class Adviser(models.Model):
-    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
-    Name = models.CharField(max_length=20, verbose_name='名称')
     Project = models.ForeignKey("Project", null=True, blank=True, on_delete=models.SET_NULL,
                                 verbose_name='项目')
+    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
+    Name = models.CharField(max_length=20, verbose_name='名称')
+    objects = models.Manager()
 
     def __str__(self):
         return self.Name + "(" + self.ID + ")"
@@ -67,10 +70,11 @@ class Adviser(models.Model):
 
 
 class Posterior(models.Model):
-    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
-    Name = models.CharField(max_length=20, verbose_name='名称')
     Project = models.ForeignKey("Project", null=True, blank=True, on_delete=models.SET_NULL,
                                 verbose_name='项目')
+    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
+    Name = models.CharField(max_length=20, verbose_name='名称')
+    objects = models.Manager()
 
     def __str__(self):
         return self.Name + "(" + self.ID + ")"
@@ -83,16 +87,16 @@ class Posterior(models.Model):
 class NavData(models.Model):
     # Project = models.ForeignKey('Project', null=True ,blank=True, on_delete=models.SET_NULL, verbose_name='项目')
     # InfoDate = models.DateField(verbose_name='口径日期')
-    Code = models.CharField(max_length=10, verbose_name='编号')
-    Name = models.CharField(max_length=50, verbose_name='名称')
-    Holdings = models.IntegerField(verbose_name='持股数量', null=True)
+    Code = models.CharField(max_length=10, verbose_name='证券代码')
+    Name = models.CharField(max_length=50, verbose_name='证券简称')
+    Holdings = models.IntegerField(verbose_name='持股数量（股）', null=True)
     Purchase_Price = models.FloatField(verbose_name='成本价', null=True)
-    Costs = models.FloatField(verbose_name='成本', null=True)
+    Costs = models.FloatField(verbose_name='持有成本', null=True)
     Cost_to_NAV = models.FloatField(verbose_name='成本占净值比例(%)', null=True)
-    Market_Price = models.FloatField(verbose_name='收盘价', null=True)
-    Market_Value = models.FloatField(verbose_name='市值', null=True)
+    Market_Price = models.FloatField(verbose_name='当日市价', null=True)
+    Market_Value = models.FloatField(verbose_name='当日市值', null=True)
     Market_Value_to_NAV = models.FloatField(verbose_name='市值占净值比例(%)', null=True)
-    Valuation = models.FloatField(verbose_name='估值', null=True)
+    Valuation = models.FloatField(verbose_name='估值增值', null=True)
     Status = models.CharField(max_length=10, verbose_name='交易状态', null=True)
     objects = models.Manager()
 
@@ -100,6 +104,6 @@ class NavData(models.Model):
         return self.Name + "(" + self.Code + ")"
 
     class Meta:
-        verbose_name = 'A股持仓'
-        verbose_name_plural = 'A股持仓'
+        verbose_name = '底仓详情'
+        verbose_name_plural = '底仓详情'
 
