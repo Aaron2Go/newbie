@@ -9,7 +9,7 @@ Data Management Tool based on Django XAdmin
 
     pip install git+git://github.com/sshwsfc/xadmin.git@django2
 
-## Fix
+### Fix
 \Lib\site-packages\xadmin\views\list.py line 75
 
 ```diff
