@@ -10,7 +10,7 @@ Data Management Tool based on Django XAdmin
     pip install git+git://github.com/sshwsfc/xadmin.git@django2
 
 ## Fix
-`\Lib\site-packages\xadmin\views\list.py line 75`
+\Lib\site-packages\xadmin\views\list.py line 75
 
 ```diff
 -text = mark_safe(wrap % text)
