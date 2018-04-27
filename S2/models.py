@@ -20,10 +20,10 @@ class Project(models.Model):
     Branch = models.ForeignKey("Branch", null=True, on_delete=models.SET_NULL,
                                verbose_name='经营机构')
     Project_Type = (
-        ('直投类', '直投类'),
-        ('配资类', '配资类'),
+        ('Z', '直投类'),
+        ('P', '配资类'),
     )
-    Type = models.CharField(max_length=10,choices=Project_Type, verbose_name='类型')
+    Type = models.CharField(max_length=1,choices=Project_Type, verbose_name='类型')
     Approval_Form_Num = models.CharField(max_length=150, verbose_name='审批单号')
     Issue_Date = models.DateField(verbose_name='发行日期')
     Duration = models.IntegerField(verbose_name='期限')
