@@ -4,6 +4,7 @@ import xadmin
 from xadmin import views
 
 
+# https://outin.github.io/newbie/
 class GlobalSettings(object):
     site_title = '底仓管理系统'
     site_footer = '2018 李旭 & 赵新宇 '
@@ -13,10 +14,19 @@ class GlobalSettings(object):
 xadmin.site.register(views.CommAdminView, GlobalSettings)
 
 
+class BaseSetting(object):
+    enable_themes = True  # 表示使用主题功能
+    use_bootswatch = True
+
+
+xadmin.site.register(views.BaseAdminView, BaseSetting)
+
+
 # Register your models here.
 
 class BranchAdmin(object):
-    list_display = ('Name', 'Area')
+    list_display = ['Name', 'Area']
+
 
 
 xadmin.site.register(Branch, BranchAdmin)

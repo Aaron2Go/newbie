@@ -9,6 +9,10 @@ Data Management Tool based on Django Admin
 
     pip install git+git://github.com/sshwsfc/xadmin.git@django2
 
+    Fix: \Lib\site-packages\xadmin\views\list.py line 75
+    -text = mark_safe(wrap % text)
+    +text = mark_safe(wrap.replace('%s', text))
+
 ## Before Push to Github
 Clear your personal data:
 
@@ -23,5 +27,3 @@ Initialize database:
 Rebuild database:
 
     python build.py rebuild
-
-[回到顶部](# Newbie Project)
