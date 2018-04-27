@@ -30,9 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'xadmin',
+    'crispy_forms',
+    'reversion',
     'django.contrib.contenttypes',
-    'grappelli.dashboard',
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -132,7 +133,3 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     )
-
-GRAPPELLI_ADMIN_TITLE='底仓监控系统'
-
-GRAPPELLI_INDEX_DASHBOARD = 'newbie.dashboard.CustomIndexDashboard'

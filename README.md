@@ -1,27 +1,27 @@
-# newbie
+# Newbie Project
 
 Data Management Tool based on Django Admin
 
-# Pre-requisitions
-'Python 3' 'Django 2'
+## Pre-requisitions
+`Python 3` `Django 2`
 
     pip install django
 
-    pip install grappelli
+    pip install git+git://github.com/sshwsfc/xadmin.git@django2
 
-    pip install feedparser
-
-# Before Push to Github
+## Before Push to Github
 Clear your personal data:
 
     python clear.py
 
-# After Pull from Github
+## After Pull from Github
 Initialize database:
 
     python build.py new
 
-# When models change significantly
+## When models change significantly
 Rebuild database:
 
     python build.py rebuild
+
+[回到顶部](# Newbie Project)
