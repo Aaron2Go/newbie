@@ -1,9 +1,9 @@
 # Newbie Project
 
-Data Management Tool based on Django Admin
+Data Management Tool based on Django XAdmin
 
 ## Pre-requisitions
-`Python 3` `Django 2`
+`Python 3` `Django 2` `XAdmin for Django 2`
 
     pip install django
 
