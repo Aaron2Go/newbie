@@ -28,46 +28,109 @@ class BranchAdmin(object):
     list_display = ['Name', 'Area']
 
 
-
 xadmin.site.register(Branch, BranchAdmin)
 
 
 class ProjectAdmin(object):
-    list_display = ('ID', 'Name', 'Branch', 'Type', 'Issue_Date', 'Duration', 'Amount',
-                    'Leverage_Ratio')
-    list_filter = ['Branch']
+    data_charts = {
+        "user_count": {
+            'title': u"User Report",
+            "x-field": "Amount",
+            "y-field": "Duration",
+            "order": (
+                'Amount',
+            )
+        },
+    }
+    list_display = [
+        'ID',
+        'Name',
+        'Branch',
+        'Type',
+        'Issue_Date',
+        'Duration',
+        'Amount',
+        'Leverage_Ratio',
+    ]
+    list_filter = [
+        'Branch',
+        'Type',
+    ]
+    search_fields = [
+        'ID',
+        'Name',
+        'Branch__Name',
+        'Branch__Area',
+        'Type',
+    ]
 
 
 xadmin.site.register(Project, ProjectAdmin)
 
 
 class GuarantorAdmin(object):
-    list_display = ('ID', 'Name', 'Project')
+    list_display = [
+        'ID',
+        'Name',
+        'Project',
+    ]
 
 
 xadmin.site.register(Guarantor, GuarantorAdmin)
 
 
 class AdviserAdmin(object):
-    list_display = ('ID', 'Name', 'Project')
+    list_display = [
+        'ID',
+        'Name',
+        'Project',
+    ]
 
 
 xadmin.site.register(Adviser, AdviserAdmin)
 
 
 class PosteriorAdmin(object):
-    list_display = ('ID', 'Name', 'Project')
+    list_display = [
+        'ID',
+        'Name',
+        'Project',
+    ]
 
 
 xadmin.site.register(Posterior, PosteriorAdmin)
 
 
 class NavDataAdmin(object):
-    # list_display = ('Project', 'InfoDate', 'Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Price', 'Market_Value', 'Market_Value_to_NAV', 'Valuation', 'Status')
-    list_display = (
-        'Code', 'Name', 'Holdings', 'Purchase_Price', 'Costs', 'Cost_to_NAV', 'Market_Price', 'Market_Value',
-        'Market_Value_to_NAV', 'Valuation', 'Status')
-    search_fields = ['Name']
+    list_display = [
+        #'Project',
+        #'InfoDate',
+        'Code',
+        'Name',
+        'Holdings',
+        'Purchase_Price',
+        'Costs',
+        'Cost_to_NAV',
+        'Market_Price',
+        'Market_Value',
+        'Market_Value_to_NAV',
+        'Valuation',
+        'Status',
+    ]
+    search_fields = [
+        'Code',
+        'Name',
+        'Project__Name',
+        'Project__ID',
+        'Project__Branch__Name',
+        'Project__Branch__Area',
+        'Project__Type',
+    ]
+    list_filter = [
+        'Status',
+        'Project__Branch',
+        'InfoDate',
+    ]
 
 
 xadmin.site.register(NavData, NavDataAdmin)

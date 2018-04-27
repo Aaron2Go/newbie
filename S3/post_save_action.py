@@ -26,7 +26,7 @@ def format_field_status(s):
         return '停牌'
 
 
-def interpret_stock(file_path):
+def interpret_stock(file_path,project,infodate):
     df = pd.read_excel(file_path, sheet_name=0)
     field_row = 0
     target_field_id = '科目代码'
@@ -82,7 +82,7 @@ def interpret_stock(file_path):
                 temp_list.append(format_field_percentage(df.iat[i, field_list_number[j]]))
             else:
                 temp_list.append(df.iat[i, field_list_number[j]])
-        NavData.objects.get_or_create(Code=temp_list[0], Name=temp_list[1], Holdings=temp_list[2],
+        NavData.objects.get_or_create(Project=Project.objects.get(ID=project), InfoDate=infodate,Code=temp_list[0], Name=temp_list[1], Holdings=temp_list[2],
                                       Purchase_Price=temp_list[3], Costs=temp_list[4], Cost_to_NAV=temp_list[5],
                                       Market_Price=temp_list[6], Market_Value=temp_list[7],
                                       Market_Value_to_NAV=temp_list[8], Valuation=temp_list[9], Status=temp_list[10])

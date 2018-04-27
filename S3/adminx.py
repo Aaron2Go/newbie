@@ -7,24 +7,50 @@ import xadmin
 
 
 class PlBranchAdmin(object):
-    pass
+    list_display = [
+        'File',
+        'UploadTime',
+        'Comments',
+    ]
+    search_fields = [
+        'File',
+        'Comments',
+    ]
 
 
 xadmin.site.register(PlBranch, PlBranchAdmin)
 
 
 class PlProjectAdmin(object):
-    pass
+    list_display = [
+        'File',
+        'UploadTime',
+        'Comments',
+    ]
+    search_fields = [
+        'File',
+        'Comments',
+    ]
 
 
 xadmin.site.register(PlProject, PlProjectAdmin)
 
 
 class NavFileAdmin(object):
-    # list_display = ('Project', 'InfoDate', 'Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
-    # list_display = (
-    # 'Filename', 'File', 'FileType', 'UploadedDateTime', 'LastModifiedDateTime', 'ModifiedTimes', 'Comments')
-    pass
+    list_display = [
+        'InfoDate',
+        'Project',
+        'File',
+        'UploadTime',
+        'Comments',
+    ]
+    search_fields = [
+        'Project',
+        'Comments',
+    ]
+    list_filter = [
+        'InfoDate',
+    ]
 
 
 xadmin.site.register(NavFile, NavFileAdmin)
