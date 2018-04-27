@@ -23,5 +23,3 @@ Initialize database:
 Rebuild database:
 
     python build.py rebuild
-
-[回到顶部](# Newbie Project)
