@@ -82,7 +82,7 @@ class Posterior(models.Model):
 
 
 class NavData(models.Model):
-    Project = models.ForeignKey(Project,related_query_name='navdata', related_name='navdata',null=True ,blank=True, on_delete=models.CASCADE, verbose_name='项目')
+    Project = models.ForeignKey(Project,related_name='navdata',null=True ,blank=True, on_delete=models.CASCADE, verbose_name='项目')
     InfoDate = models.DateField(verbose_name='口径日期')
     Code = models.CharField(max_length=10, verbose_name='证券代码')
     Name = models.CharField(max_length=50, verbose_name='证券简称')
