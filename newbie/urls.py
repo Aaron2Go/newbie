@@ -26,5 +26,5 @@ from xadmin.plugins import xversion
 xversion.register_models()
 
 urlpatterns = [
-    path(r'', xadmin.site.urls)
+    path('', xadmin.site.urls)
 ]

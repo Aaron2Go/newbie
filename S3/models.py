@@ -2,10 +2,9 @@ from django.db import models
 import os
 
 
-
 # Create your models here.
 class NavFile(models.Model):
-    Project = models.ForeignKey('S2.Project', null=True, blank=True, on_delete=models.SET_NULL, verbose_name='所属项目')
+    Project = models.ForeignKey('S2.Project', null=True, blank=True, on_delete=models.CASCADE, verbose_name='所属项目')
     InfoDate = models.DateField(verbose_name='口径日期')
     File = models.FileField(upload_to=os.path.join('Upload', 'Nav_Tables'), verbose_name='净值表Excel')
     UploadTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
@@ -27,7 +26,7 @@ class PlBranch(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return str(self.File)# + "(" + str(self.UploadTime) + ")"
+        return str(self.File)
 
     class Meta:
         verbose_name = '经营机构'

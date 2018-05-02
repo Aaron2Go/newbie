@@ -63,6 +63,7 @@ class ProjectAdmin(object):
         'Branch__Area',
         'Type',
     ]
+    #model_icon = 'fa fa-tree'
 
 
 xadmin.site.register(Project, ProjectAdmin)
@@ -102,6 +103,11 @@ xadmin.site.register(Posterior, PosteriorAdmin)
 
 
 class NavDataAdmin(object):
+    show_detail_fields = [
+    #    'Project',
+    #    'Branch',
+        'Name',
+    ]
     list_display = [
         #'Project',
         #'InfoDate',

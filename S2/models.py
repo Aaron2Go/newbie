@@ -17,13 +17,13 @@ class Branch(models.Model):
 class Project(models.Model):
     ID = models.CharField(max_length=10, verbose_name='编号', primary_key=True, unique=True)
     Name = models.CharField(max_length=50, verbose_name='项目名称')
-    Branch = models.ForeignKey("Branch", null=True, on_delete=models.SET_NULL,
+    Branch = models.ForeignKey("Branch", null=True, on_delete=models.CASCADE,
                                verbose_name='经营机构')
     Project_Type = (
-        ('Z', '直投类'),
-        ('P', '配资类'),
+        ('直投类', '直投类'),
+        ('配资类', '配资类'),
     )
-    Type = models.CharField(max_length=1,choices=Project_Type, verbose_name='类型')
+    Type = models.CharField(max_length=3,choices=Project_Type, verbose_name='类型')
     Approval_Form_Num = models.CharField(max_length=150, verbose_name='审批单号')
     Issue_Date = models.DateField(verbose_name='发行日期')
     Duration = models.IntegerField(verbose_name='期限')
@@ -40,8 +40,7 @@ class Project(models.Model):
 
 
 class Guarantor(models.Model):
-    Project = models.ForeignKey("Project", null=True, blank=True, on_delete=models.SET_NULL,
-                                verbose_name='项目')
+    Project = models.ManyToManyField("Project", verbose_name='项目')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
     Name = models.CharField(max_length=20, verbose_name='名称')
     objects = models.Manager()
@@ -55,8 +54,7 @@ class Guarantor(models.Model):
 
 
 class Adviser(models.Model):
-    Project = models.ForeignKey("Project", null=True, blank=True, on_delete=models.SET_NULL,
-                                verbose_name='项目')
+    Project = models.ManyToManyField("Project", verbose_name='项目')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
     Name = models.CharField(max_length=20, verbose_name='名称')
     objects = models.Manager()
@@ -70,8 +68,7 @@ class Adviser(models.Model):
 
 
 class Posterior(models.Model):
-    Project = models.ForeignKey("Project", null=True, blank=True, on_delete=models.SET_NULL,
-                                verbose_name='项目')
+    Project = models.ManyToManyField("Project", verbose_name='项目')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
     Name = models.CharField(max_length=20, verbose_name='名称')
     objects = models.Manager()
@@ -85,7 +82,7 @@ class Posterior(models.Model):
 
 
 class NavData(models.Model):
-    Project = models.ForeignKey('Project', null=True ,blank=True, on_delete=models.SET_NULL, verbose_name='项目')
+    Project = models.ForeignKey(Project,related_query_name='navdata', related_name='navdata',null=True ,blank=True, on_delete=models.CASCADE, verbose_name='项目')
     InfoDate = models.DateField(verbose_name='口径日期')
     Code = models.CharField(max_length=10, verbose_name='证券代码')
     Name = models.CharField(max_length=50, verbose_name='证券简称')

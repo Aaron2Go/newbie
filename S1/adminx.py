@@ -1,43 +1,24 @@
 from django.contrib import admin
-from S2.models import NavData  # Project, Branch, Stock
+from S1.models import *  # Project, Branch, Stock
+from S2.models import *
 import xadmin
 
 
-class NavData2(NavData):  # 继承 父类 course
-    class Meta:
-        verbose_name = '底仓查询'
-        verbose_name_plural = verbose_name
-        proxy = True  # 不会生成新的表
-
-# Register your models here.
-#class QueryAdmin(admin.ModelAdmin):
-#    def s
-class NavDataAdmin2(object):
+class ZZpp(object):
     list_display = [
-        #'Project__Branch__Name',
-        #'Project__Name',
-        'Project',
-        'InfoDate',
-        'Code',
         'Name',
-        'Holdings',
-        'Market_Price',
-        'Market_Value',
-        'Status',
-    ]
-    search_fields = [
-        'Code',
-        'Name',
-        'Project__Name',
-        'Project__ID',
-        'Project__Branch__Name',
-        'Project__Branch__Area',
-        'Project__Type',
-    ]
-    list_filter = [
-        'Status',
-        'Project__Branch',
-        'InfoDate',
+        'get_zj_nums',
     ]
 
-xadmin.site.register(NavData2, NavDataAdmin2)
+    def queryset(self):
+        qs = super(ZZpp, self).queryset()
+        qs = qs.filter(Type='配资类')
+        return qs
+
+    def get_zj_nums(self, *args, **kwargs):
+        return self.navdata.objects.all().count()
+
+    get_zj_nums.short_description = "底仓数"
+
+
+xadmin.site.register(ZProject, ZZpp)
