@@ -1,6 +1,6 @@
 from django.db import models
 import os
-from simple_history.models import HistoricalRecords
+#from simple_history.models import HistoricalRecords
 
 
 # Create your models here.

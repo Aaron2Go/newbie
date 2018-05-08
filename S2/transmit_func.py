@@ -1,7 +1,8 @@
 from S2.models import StockJournal
 from S1.models import StockLedge
 from django.utils.timezone import now
-import tushare as tu
+
+# import tushare as tu
 
 def generate_stockledge(infodate):
     StockLedge.objects.filter(InfoDate=infodate).delete()
