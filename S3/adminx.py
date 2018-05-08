@@ -6,7 +6,7 @@ import xadmin
 # Register your models here.
 
 
-class PlBranchAdmin(object):
+class BranchFileAdmin(object):
     list_display = [
         'File',
         'UploadTime',
@@ -18,10 +18,10 @@ class PlBranchAdmin(object):
     ]
 
 
-xadmin.site.register(PlBranch, PlBranchAdmin)
+xadmin.site.register(BranchFile, BranchFileAdmin)
 
 
-class PlProjectAdmin(object):
+class ProjectFileAdmin(object):
     list_display = [
         'File',
         'UploadTime',
@@ -33,7 +33,7 @@ class PlProjectAdmin(object):
     ]
 
 
-xadmin.site.register(PlProject, PlProjectAdmin)
+xadmin.site.register(ProjectFile, ProjectFileAdmin)
 
 
 class NavFileAdmin(object):

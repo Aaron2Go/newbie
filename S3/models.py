@@ -1,5 +1,6 @@
 from django.db import models
 import os
+from simple_history.models import HistoricalRecords
 
 
 # Create your models here.
@@ -19,7 +20,7 @@ class NavFile(models.Model):
         verbose_name_plural = '净值表'
 
 
-class PlBranch(models.Model):
+class BranchFile(models.Model):
     File = models.FileField(upload_to=os.path.join('Upload','Branches'), verbose_name='数据文件')
     UploadTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
     Comments = models.TextField(verbose_name='备注', null=True, blank=True)
@@ -33,7 +34,7 @@ class PlBranch(models.Model):
         verbose_name_plural = '经营机构'
 
 
-class PlProject(models.Model):
+class ProjectFile(models.Model):
     File = models.FileField(upload_to=os.path.join('Upload', 'Projects'), verbose_name='数据文件')
     InfoDate = models.DateField(verbose_name='口径日期')
     UploadTime = models.DateTimeField(verbose_name='上传时间', auto_now=True, auto_created=True)
@@ -46,3 +47,4 @@ class PlProject(models.Model):
     class Meta:
         verbose_name = '项目情况'
         verbose_name_plural = '项目情况'
+

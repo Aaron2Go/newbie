@@ -3,7 +3,6 @@ from S2.models import *  # Project, Branch, Stock
 import xadmin
 from xadmin import views
 
-
 # https://outin.github.io/newbie/
 class GlobalSettings(object):
     site_title = '底仓管理系统'
@@ -77,7 +76,7 @@ class GuarantorAdmin(object):
     ]
 
 
-xadmin.site.register(Guarantor, GuarantorAdmin)
+xadmin.site.register(GuarantorJournal, GuarantorAdmin)
 
 
 class AdviserAdmin(object):
@@ -88,7 +87,7 @@ class AdviserAdmin(object):
     ]
 
 
-xadmin.site.register(Adviser, AdviserAdmin)
+xadmin.site.register(AdviserJournal, AdviserAdmin)
 
 
 class PosteriorAdmin(object):
@@ -99,10 +98,10 @@ class PosteriorAdmin(object):
     ]
 
 
-xadmin.site.register(Posterior, PosteriorAdmin)
+xadmin.site.register(PosteriorJournal, PosteriorAdmin)
 
 
-class NavDataAdmin(object):
+class StockJournalAdmin(object):
     show_detail_fields = [
     #    'Project',
     #    'Branch',
@@ -116,10 +115,10 @@ class NavDataAdmin(object):
         'Holdings',
         'Purchase_Price',
         'Costs',
-        'Cost_to_NAV',
+        'Cost_to_Nav',
         'Market_Price',
         'Market_Value',
-        'Market_Value_to_NAV',
+        'Market_Value_to_Nav',
         'Valuation',
         'Status',
     ]
@@ -139,4 +138,16 @@ class NavDataAdmin(object):
     ]
 
 
-xadmin.site.register(NavData, NavDataAdmin)
+xadmin.site.register(StockJournal, StockJournalAdmin)
+
+
+class NavAdmin(object):
+
+    list_display = [
+        'Project',
+        'InfoDate',
+        'NetValue',
+    ]
+
+
+xadmin.site.register(NavJournal, NavAdmin)

@@ -82,10 +82,21 @@ def interpret_stock(file_path,project,infodate):
                 temp_list.append(format_field_percentage(df.iat[i, field_list_number[j]]))
             else:
                 temp_list.append(df.iat[i, field_list_number[j]])
-        NavData.objects.get_or_create(Project=Project.objects.get(ID=project), InfoDate=infodate,Code=temp_list[0], Name=temp_list[1], Holdings=temp_list[2],
-                                      Purchase_Price=temp_list[3], Costs=temp_list[4], Cost_to_NAV=temp_list[5],
-                                      Market_Price=temp_list[6], Market_Value=temp_list[7],
-                                      Market_Value_to_NAV=temp_list[8], Valuation=temp_list[9], Status=temp_list[10])
+        StockJournal.objects.get_or_create(
+            Project=Project.objects.get(ID=project),
+            InfoDate=infodate,
+            Code=temp_list[0],
+            Name=temp_list[1],
+            Holdings=temp_list[2],
+            Purchase_Price=temp_list[3],
+            Costs=temp_list[4],
+            Cost_to_Nav=temp_list[5],
+            Market_Price=temp_list[6],
+            Market_Value=temp_list[7],
+            Market_Value_to_Nav=temp_list[8],
+            Valuation=temp_list[9],
+            Status=temp_list[10]
+        )
         print(temp_list)
         temp_list.clear()
 
@@ -103,13 +114,15 @@ def interpret_project(file_path):
     for i in range(0, len(df)):
         b1=Branch.objects.get(Name=df['经营机构'][i])
         print(b1)
-        Project.objects.get_or_create(ID=df['项目编码'][i],
-                                      Name=df['项目名称'][i],
-                                      Branch=b1,
-                                      Type=df['项目类型'][i],
-                                      Approval_Form_Num=df['审批通知书编号'][i],
-                                      Issue_Date=df['发行日期'][i],
-                                      Amount=df['金额（万）'][i],
-                                      Duration=df['期限（月）'][i],
-                                      Leverage_Ratio=df['杠杆比例'][i])
+        Project.objects.get_or_create(
+            ID=df['项目编码'][i],
+            Name=df['项目名称'][i],
+            Branch=b1,
+            Type=df['项目类型'][i],
+            Approval_Form_Num=df['审批通知书编号'][i],
+            Issue_Date=df['发行日期'][i],
+            Amount=df['金额（万）'][i],
+            Duration=df['期限（月）'][i],
+            Leverage_Ratio=df['杠杆比例'][i]
+        )
 

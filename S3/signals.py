@@ -4,9 +4,9 @@ from S3.models import *
 from S3.post_save_action import *
 
 
-@receiver(post_save, sender=PlBranch)
+@receiver(post_save, sender=BranchFile)
 def import_to_branch(sender, instance, **kwargs):
-    interpret_branch(PlBranch.objects.values('File').order_by('UploadTime').last()['File'])
+    interpret_branch(BranchFile.objects.values('File').order_by('UploadTime').last()['File'])
 
 
 @receiver(post_save, sender=NavFile)
@@ -18,6 +18,6 @@ def import_to_navdata(sender, instance, **kwargs):
     )
 
 
-@receiver(post_save, sender=PlProject)
+@receiver(post_save, sender=ProjectFile)
 def import_to_project(sender, instance, **kwargs):
-    interpret_project(PlProject.objects.values('File').order_by('UploadTime').last()['File'])
+    interpret_project(ProjectFile.objects.values('File').order_by('UploadTime').last()['File'])
