@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4e95625-c606-4135-9d30-40d621284e0a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/newbie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/newbie.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S1/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/S1/adminx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S1/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/S1/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S1/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/S1/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S2/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/S2/adminx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S2/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/S2/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S2/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/S2/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S3/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/S3/adminx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S3/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/S3/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S3/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/S3/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S3/post_save_action.py" beforeDir="false" afterPath="$PROJECT_DIR$/S3/post_save_action.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/S3/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/S3/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/S2/transmit_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/S2/transmit_func.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/S2/transmit_func.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -206,6 +193,11 @@
               <item name="newbie" type="b2602c69:ProjectViewProjectNode" />
               <item name="newbie" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="newbie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="newbie" type="462c0819:PsiDirectoryNode" />
+              <item name="S2" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -294,10 +286,10 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50199205" side_tool="true" weight="0.44505495" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32971507" />
-      <window_info anchor="bottom" x="1440" y="-174" width="1317" height="783" id="Python Console" order="10" type="FLOATING" visible="true" weight="0.66483516" />
+      <window_info anchor="bottom" x="1440" y="-174" width="1317" height="783" id="Python Console" order="10" type="FLOATING" weight="0.66483516" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.49856734" visible="true" weight="0.2971506" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7504873" visible="true" weight="0.09670487" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49856734" visible="true" weight="0.2971506" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7504873" visible="true" weight="0.09670487" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.3295129" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -644,7 +636,7 @@
     <entry file="file://$PROJECT_DIR$/S2/transmit_func.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
