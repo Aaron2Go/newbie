@@ -1,14 +1,19 @@
 from S2.models import StockJournal
 from S1.models import StockLedge
 from django.utils.timezone import now
-import tushare as tu
+import tushare as tu # Tushare 用来获取股票行情信息
+
 
 def generate_stockledge(infodate):
+    # 清除infodate对于的所有统计数据，以重算所有
     StockLedge.objects.filter(InfoDate=infodate).delete()
+    # 获取每行的首列
     item_list = StockJournal.objects.filter(InfoDate=infodate).distinct().values('Code')
+    # 对具体每行数据做操作
     for i in item_list:
+        # 筛选出某行对应的原始数据
         records = StockJournal.objects.filter(InfoDate=infodate, Code=i['Code'])
-
+        # 计算统计指标
         holdings = 0
         name = "test"
         project_nums = records.distinct().values('Project').count()
@@ -23,7 +28,7 @@ def generate_stockledge(infodate):
 
         for r in records:
             holdings = holdings + r.Holdings
-
+        # 写入记录到数据表
         StockLedge.objects.get_or_create(
             InfoDate=infodate,
             Code=i['Code'],
