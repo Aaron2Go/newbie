@@ -31,30 +31,31 @@ def format_field_status(s):
 def interpret_navfile(file_path, project, infodate):
     df = pd.read_excel(file_path, sheet_name=0)
     print(df)
+    ptn1 = re.compile(r'估?值?日期:?：?([1-2]{1}[0-9]{3}\S?[0-1]?[0-9]{1}\S?[0-3]?[0-9]{1})')
     # 单位净值
-    # ptn1 = re.compile('估?值?日期:?：?[1-2]{1}[0-9]{3}\S?[0-1]?[0-9]{1}\S?[0-3]?[0-9]{1}')
     ptn2 = re.compile(r'单位净值:.*?([0-9]+.[0-9]+)$')
-    ff = False
+    # ff = False
     for row in range(0, len(df)):
         for col in range(0, df.shape[1] - 1):
             tmpstr = str(df.iat[row, col]) + str(df.iat[row, col + 1])
-            # if re.search(ptn1, tmpstr) != None:
-            #    str1 = re.search(ptn1, tmpstr).group()
-            # el
-            if re.search(ptn2, tmpstr) != None:
+            if re.search(ptn1, tmpstr) != None:
+                print(re.search(ptn1, tmpstr).group(0))
+                print(re.search(ptn2, tmpstr).group(1))
+                str1 = re.search(ptn1, tmpstr).group(1)
+            elif re.search(ptn2, tmpstr) != None:
                 print(re.search(ptn2, tmpstr).group(0))
                 print(re.search(ptn2, tmpstr).group(1))
-                ff = True
+                # ff = True
                 str2 = re.search(ptn2, tmpstr).group(1)
                 break
-        if ff:
-            break
+    #    if ff:
+    #        break
 
     # str3 = os.path.split(file_path)[1].rstrip(os.path.splitext(file_path))
     print(str2)
     NavJournal.objects.get_or_create(
         Project=Project.objects.get(ID=project),  # 项目
-        InfoDate=infodate,  # 口径日期
+        InfoDate=str1,  # 口径日期
         NetValue=str2  # 净值
     )
 
