@@ -1,13 +1,8 @@
 from S2.models import StockJournal
 from S1.models import StockLedge
 from django.utils.timezone import now
-<<<<<<< HEAD
-
-# import tushare as tu
-=======
 import tushare as tu # Tushare 用来获取股票行情信息
 
->>>>>>> fa19428fa6a93d2ef0d15f5b1d5762c7ce14bafd
 
 def generate_stockledge(infodate):
     # 清除infodate对于的所有统计数据，以重算所有

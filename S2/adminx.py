@@ -141,7 +141,7 @@ class StockJournalAdmin(object):
 xadmin.site.register(StockJournal, StockJournalAdmin)
 
 
-class NavAdmin(object):
+class NavJournalAdmin(object):
 
     list_display = [
         'Project',
@@ -150,4 +150,4 @@ class NavAdmin(object):
     ]
 
 
-xadmin.site.register(NavJournal, NavAdmin)
+xadmin.site.register(NavJournal, NavJournalAdmin)

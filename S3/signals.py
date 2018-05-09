@@ -5,13 +5,13 @@ from S3.post_save_action import *
 
 
 @receiver(post_save, sender=BranchFile)
-def import_to_branch(sender, instance, **kwargs):
-    interpret_branch(BranchFile.objects.values('File').order_by('UploadTime').last()['File'])
+def branchfile_receiver(sender, instance, **kwargs):
+    interpret_branchfile(BranchFile.objects.values('File').order_by('UploadTime').last()['File'])
 
 
 @receiver(post_save, sender=NavFile)
-def import_to_navdata(sender, instance, **kwargs):
-    interpret_stock(
+def navfile_receiver(sender, instance, **kwargs):
+    interpret_navfile(
         NavFile.objects.values('File').order_by('UploadTime').last()['File'],
         NavFile.objects.values('Project__ID').order_by('UploadTime').last()['Project__ID'],
         NavFile.objects.values('InfoDate').order_by('UploadTime').last()['InfoDate'],
@@ -19,5 +19,5 @@ def import_to_navdata(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=ProjectFile)
-def import_to_project(sender, instance, **kwargs):
-    interpret_project(ProjectFile.objects.values('File').order_by('UploadTime').last()['File'])
+def projectfile_receiver(sender, instance, **kwargs):
+    interpret_projectfile(ProjectFile.objects.values('File').order_by('UploadTime').last()['File'])
