@@ -31,50 +31,15 @@ def format_field_status(s):
 def interpret_navfile(file_path, project, infodate):
     df = pd.read_excel(file_path, sheet_name=0)
     print(df)
-    ptn1 = re.compile(r'估?值?日期:?：?\s*([0-9]{4}\S?[0-9]{2}\S?[0-9]{2})')
     # 单位净值
-<<<<<<< HEAD
-    # ptn1 = re.compile('估?值?日期:?：?[1-2]{1}[0-9]{3}\S?[0-1]?[0-9]{1}\S?[0-3]?[0-9]{1}')
-    ptn2 = re.compile(r'.*?单位净值:.*?([0-9]+.[0-9]+)$')
-    ff = False
-    str2 = -1000
-    for row in range(0, len(df)):
-        for col in range(0, df.shape[1] - 1):
-            tmpstr = str(df.iat[row, col]) + str(df.iat[row, col + 1])
-            # if re.search(ptn1, tmpstr) != None:
-            #    str1 = re.search(ptn1, tmpstr).group()
-            # el
-            if re.search(ptn2, tmpstr) != None:
-                print(re.search(ptn2, tmpstr).group(0))
-                tf = True
-                for k in {'累计', '年初', '期初', '昨日', '修正', '调整'}:
-                    if k in tmpstr:
-                        print('x: '+k)
-                        tf = False
-                        break
-                if tf:
-                    ff = True
-                    str2 = re.search(ptn2, tmpstr).group(1)
-                    break
-        if ff:
-            break
-
-    # str3 = os.path.split(file_path)[1].rstrip(os.path.splitext(file_path))
-    print(str2)
-    if str2 != -1000:
-        NavJournal.objects.get_or_create(
-            Project=Project.objects.get(ID=project),  # 项目
-            InfoDate=infodate,  # 口径日期
-            NetValue=str2  # 净值
-        )
-=======
+    ptn1 = re.compile(r'估?值?日期:?：?\s*([0-9]{4}\S?[0-9]{2}\S?[0-9]{2})')
     ptn2 = re.compile(r'今?日?单位净值:?：?\s*([0-9]+.[0-9]+)')
     ptn3 = re.compile(r'[累计年初期昨修正调整]')
     str1 = ''
     for row in range(0, len(df)):
         for col in range(0, df.shape[1] - 1):
             tmpstr = str(df.iat[row, col]) + str(df.iat[row, col + 1])
-            if re.search(ptn1, tmpstr) != None:
+            if re.search(ptn1, tmpstr) is not None:
                 str0 = re.search(ptn1, tmpstr).group(0)
                 for i in range(0, len(str0)):
                     if str0[i].isdigit():
@@ -84,7 +49,7 @@ def interpret_navfile(file_path, project, infodate):
                         elif len(str1) == 7:
                             str1 += '-'
                 print('口径日期: ', str1)
-            elif re.search(ptn2, tmpstr) != None and re.search(ptn3, tmpstr) == None:
+            elif re.search(ptn2, tmpstr) is not None and re.search(ptn3, tmpstr) is None:
                     str2 = re.search(ptn2, tmpstr).group(1)
                     print('单位净值: ', str2)
     NavJournal.objects.get_or_create(
@@ -92,7 +57,6 @@ def interpret_navfile(file_path, project, infodate):
         InfoDate=str1,  # 口径日期
         NetValue=str2  # 净值
     )
->>>>>>> 2f9348ede12fe44dbb19d583866bcfe1a89363b9
 
     # 持股明细
     # df = pd.read_excel(file_path, sheet_name=0)
@@ -152,7 +116,7 @@ def interpret_navfile(file_path, project, infodate):
                 temp_list.append(df.iat[i, field_list_number[j]])
         StockJournal.objects.get_or_create(
             Project=Project.objects.get(ID=project),
-            InfoDate=infodate,
+            InfoDate=str1,
             Code=temp_list[0],
             Name=temp_list[1],
             Holdings=temp_list[2],
