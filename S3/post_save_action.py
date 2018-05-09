@@ -2,6 +2,8 @@
 
 import pandas as pd
 from S2.models import *
+import os.path
+import re
 
 
 def format_field_id(s):
@@ -126,3 +128,21 @@ def interpret_project(file_path):
             Leverage_Ratio=df['杠杆比例'][i]
         )
 
+def write_to_NavJournal(file_path):
+    df = pd.read_excel(file_path, sheet_name = 0)
+    print(df)
+    ptn1 = re.compile('估?值?日期:?：?[1-2]{1}[0-9]{3}\S?[0-1]?[0-9]{1}\S?[0-3]?[0-9]{1}')
+    ptn2 = re.compile('累计单位净值:?：?[0-9]+.[0-9]+')
+    for row in range(0, len(df)):
+        for col in range(0, df.shape[1] - 1):
+            tmpstr = str(df.iat[row, col]) + str(df.iat[row, col + 1])
+            if re.search(ptn1, tmpstr) != None:
+                str1 = re.search(ptn1, tmpstr).group()
+            elif re.search(ptn2, tmpstr) != None:
+                str2 = re.search(ptn2, tmpstr).group()
+    str3 = os.path.split(file_path)[1].rstrip(os.path.splitext(file_path))
+    NavJournal.objects.get_or_create(
+        Project = str3, # 项目
+        InfoDate = str1, # 口径日期
+        NetValue = str2 # 净值
+    )

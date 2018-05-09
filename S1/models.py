@@ -54,6 +54,7 @@ class StockLedge(models.Model):
     Days_to_Settle = models.DecimalField(verbose_name='处置天数', max_digits=5, decimal_places=2)
     Common_Stock_Outstanding= models.DecimalField(verbose_name='总股本（亿）', max_digits=7, decimal_places=2)
     #Related_Projects = models.ManyToManyField(S2.Project, verbose_name='关联项目')
+    objects = models.Manager()
     class Meta:
         verbose_name = "按标的统计"
         verbose_name_plural = verbose_name
