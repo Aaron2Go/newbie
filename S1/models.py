@@ -34,6 +34,15 @@ from S2.models import *
 #    ]
 
 #class ProjectLedge(Project):
+#    InfoDate = models.DateField(verbose_name='口径日期')
+#    Stock_Num =
+#    Stock_Num_ST =
+#    Stock_Num_Suspend =
+#    First_Record_Date =
+#    Current_Nav =
+#    Nav_Warn =
+#    Nav_Stop =
+
 #    class Meta:
 #        verbose_name = "按项目统计"
 #        verbose_name_plural = verbose_name
@@ -45,14 +54,15 @@ class StockLedge(models.Model):
     Code = models.CharField(max_length=10, verbose_name='证券代码')
     Name = models.CharField(max_length=50, verbose_name='证券简称')
     Holdings = models.IntegerField(verbose_name='持股数量（股）')
+    Holdings_to_Total = models.DecimalField(verbose_name='总股本占比', max_digits=5, decimal_places=2)
     Project_Nums = models.IntegerField(verbose_name='项目数')
     Project_Nums_20 = models.IntegerField(verbose_name='项目（超20%）数')
     Suspend_Date = models.DateField(verbose_name='停牌日期',null=True,blank=True)
     Price = models.DecimalField(verbose_name='市价', max_digits=5, decimal_places=2)
     MV = models.DecimalField(verbose_name='市值', max_digits=12, decimal_places=2)
-    Turnover_Rate = models.DecimalField(verbose_name='换手率', max_digits=5, decimal_places=4)
+    Turnover_Rate = models.DecimalField(verbose_name='换手率', max_digits=5, decimal_places=2)
     Days_to_Settle = models.DecimalField(verbose_name='处置天数', max_digits=5, decimal_places=2)
-    Common_Stock_Outstanding= models.DecimalField(verbose_name='总股本（亿）', max_digits=7, decimal_places=2)
+    Common_Stock_Outstanding = models.DecimalField(verbose_name='总股本（亿）', max_digits=12, decimal_places=2)
     #Related_Projects = models.ManyToManyField(S2.Project, verbose_name='关联项目')
     objects = models.Manager()
 
