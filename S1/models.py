@@ -7,21 +7,22 @@ from S2.models import *
 class BranchLedge(models.Model):
     InfoDate = models.DateField(verbose_name='口径日期')
     Branch = models.ForeignKey(Branch, null=True, on_delete=models.CASCADE, verbose_name='经营机构')
-    Amounts_Total = models.IntegerField(verbose_name='总金额',null=True)
-    Amounts_Avg = models.IntegerField(verbose_name='平均金额',null=True)
-    Project_Num = models.IntegerField(verbose_name='项目数',null=True)
-    Project_Num_ST = models.IntegerField(verbose_name='含ST项目数',null=True)
-    Project_Num_Suspend = models.IntegerField(verbose_name='含停牌项目数',null=True)
-    Project_Num_Normal = models.IntegerField(verbose_name='正常项目数',null=True)
-    Project_Num_Warn = models.IntegerField(verbose_name='破预警项目数',null=True)
-    Project_Num_Stop = models.IntegerField(verbose_name='破预警项目数',null=True)
-    Stock_Num = models.IntegerField(verbose_name='标的数量',null=True)
-    Stock_Num_Suspend = models.IntegerField(verbose_name='停牌标的数',null=True)
-    Stock_Num_ST = models.IntegerField(verbose_name='ST标的数',null=True)
-    Days_Settle_Max = models.DecimalField(verbose_name='最大处置天数', max_digits=5, decimal_places=2,null=True)
-    Days_Settle_Avg = models.DecimalField(verbose_name='平均处置天数', max_digits=5, decimal_places=2,null=True)
-    Days_Settle_Mid = models.DecimalField(verbose_name='中值处置天数', max_digits=5, decimal_places=2,null=True)
-
+    Amounts_Total = models.IntegerField(verbose_name='总金额', null=True)
+    Amounts_Avg = models.IntegerField(verbose_name='平均金额', null=True)
+    Project_Num = models.IntegerField(verbose_name='项目数', null=True)
+    Project_Num_ST = models.IntegerField(verbose_name='含ST项目数', null=True)
+    Project_Num_Suspend = models.IntegerField(verbose_name='含停牌项目数', null=True)
+    Project_Num_Warn = models.IntegerField(verbose_name='破预警项目数', null=True)
+    Project_Num_Stop = models.IntegerField(verbose_name='破止损项目数', null=True)
+    Stock_Num = models.IntegerField(verbose_name='标的数量', null=True)
+    Stock_Num_Suspend = models.IntegerField(verbose_name='停牌标的数', null=True)
+    Stock_Num_ST = models.IntegerField(verbose_name='ST标的数', null=True)
+    Days_Settle_Max = models.DecimalField(verbose_name='最大处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Avg = models.DecimalField(verbose_name='平均处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Mid = models.DecimalField(verbose_name='中值处置天数', max_digits=5, decimal_places=2, null=True)
+    Adviser_Num = models.IntegerField(verbose_name='投顾数', null=True)
+    Posterior_Num = models.IntegerField(verbose_name='次级数', null=True)
+    Guarantor_Num = models.IntegerField(verbose_name='差补数', null=True)
     objects = models.Manager()
 
     class Meta:
@@ -61,6 +62,7 @@ class ProjectLedge(models.Model):
             'InfoDate',
         ]
 
+
 class StockLedge(models.Model):
     InfoDate = models.DateField(verbose_name='口径日期')
     Code = models.CharField(max_length=10, verbose_name='证券代码')
@@ -86,25 +88,86 @@ class StockLedge(models.Model):
     def __str__(self):
         return self.Name + ' ' + self.Code + "(" + str(self.InfoDate) + ")"
 
-# class GuarantorLedge(models.Model):
-#    class Meta:
-#        verbose_name = "按项目统计"
-#        verbose_name_plural = verbose_name
-
 
 class AdviserLedge(models.Model):
     InfoDate = models.DateField(verbose_name='口径日期')
     Name = models.CharField(max_length=20, verbose_name='名称')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
-    #Project_Num=
-
+    Amounts_Total = models.IntegerField(verbose_name='总金额', null=True)
+    Amounts_Avg = models.IntegerField(verbose_name='平均金额', null=True)
+    Project_Num = models.IntegerField(verbose_name='项目数', null=True)
+    Project_Num_ST = models.IntegerField(verbose_name='含ST项目数', null=True)
+    Project_Num_Suspend = models.IntegerField(verbose_name='含停牌项目数', null=True)
+    Project_Num_Warn = models.IntegerField(verbose_name='破预警项目数', null=True)
+    Project_Num_Stop = models.IntegerField(verbose_name='破止损项目数', null=True)
+    Stock_Num = models.IntegerField(verbose_name='标的数量', null=True)
+    Stock_Num_Suspend = models.IntegerField(verbose_name='停牌标的数', null=True)
+    Stock_Num_ST = models.IntegerField(verbose_name='ST标的数', null=True)
+    Days_Settle_Max = models.DecimalField(verbose_name='最大处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Avg = models.DecimalField(verbose_name='平均处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Mid = models.DecimalField(verbose_name='中值处置天数', max_digits=5, decimal_places=2, null=True)
+    Branch_Num = models.IntegerField(verbose_name='经营机构数', null=True)
 
     class Meta:
-        verbose_name = "按项目统计"
+        verbose_name = "按投顾统计"
         verbose_name_plural = verbose_name
+        unique_together = [
+            'InfoDate',
+            'ID'
+        ]
 
 
-# class PosteriorLedge(models.Model):
-#    class Meta:
-#        verbose_name = "按项目统计"
-#        verbose_name_plural = verbose_name
+class PosteriorLedge(models.Model):
+    InfoDate = models.DateField(verbose_name='口径日期')
+    Name = models.CharField(max_length=20, verbose_name='名称')
+    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
+    Amounts_Total = models.IntegerField(verbose_name='总金额', null=True)
+    Amounts_Avg = models.IntegerField(verbose_name='平均金额', null=True)
+    Project_Num = models.IntegerField(verbose_name='项目数', null=True)
+    Project_Num_ST = models.IntegerField(verbose_name='含ST项目数', null=True)
+    Project_Num_Suspend = models.IntegerField(verbose_name='含停牌项目数', null=True)
+    Project_Num_Warn = models.IntegerField(verbose_name='破预警项目数', null=True)
+    Project_Num_Stop = models.IntegerField(verbose_name='破止损项目数', null=True)
+    Stock_Num = models.IntegerField(verbose_name='标的数量', null=True)
+    Stock_Num_Suspend = models.IntegerField(verbose_name='停牌标的数', null=True)
+    Stock_Num_ST = models.IntegerField(verbose_name='ST标的数', null=True)
+    Days_Settle_Max = models.DecimalField(verbose_name='最大处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Avg = models.DecimalField(verbose_name='平均处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Mid = models.DecimalField(verbose_name='中值处置天数', max_digits=5, decimal_places=2, null=True)
+    Branch_Num = models.IntegerField(verbose_name='经营机构数', null=True)
+
+    class Meta:
+        verbose_name = "按次级统计"
+        verbose_name_plural = verbose_name
+        unique_together = [
+            'InfoDate',
+            'ID'
+        ]
+
+
+class GuarantorLedge(models.Model):
+    InfoDate = models.DateField(verbose_name='口径日期')
+    Name = models.CharField(max_length=20, verbose_name='名称')
+    ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
+    Amounts_Total = models.IntegerField(verbose_name='总金额', null=True)
+    Amounts_Avg = models.IntegerField(verbose_name='平均金额', null=True)
+    Project_Num = models.IntegerField(verbose_name='项目数', null=True)
+    Project_Num_ST = models.IntegerField(verbose_name='含ST项目数', null=True)
+    Project_Num_Suspend = models.IntegerField(verbose_name='含停牌项目数', null=True)
+    Project_Num_Warn = models.IntegerField(verbose_name='破预警项目数', null=True)
+    Project_Num_Stop = models.IntegerField(verbose_name='破止损项目数', null=True)
+    Stock_Num = models.IntegerField(verbose_name='标的数量', null=True)
+    Stock_Num_Suspend = models.IntegerField(verbose_name='停牌标的数', null=True)
+    Stock_Num_ST = models.IntegerField(verbose_name='ST标的数', null=True)
+    Days_Settle_Max = models.DecimalField(verbose_name='最大处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Avg = models.DecimalField(verbose_name='平均处置天数', max_digits=5, decimal_places=2, null=True)
+    Days_Settle_Mid = models.DecimalField(verbose_name='中值处置天数', max_digits=5, decimal_places=2, null=True)
+    Branch_Num = models.IntegerField(verbose_name='经营机构数', null=True)
+
+    class Meta:
+        verbose_name = "按差补统计"
+        verbose_name_plural = verbose_name
+        unique_together = [
+            'InfoDate',
+            'ID'
+        ]

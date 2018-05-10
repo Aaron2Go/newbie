@@ -1,6 +1,5 @@
-from django.contrib import admin
+# from django.contrib import admin
 from S1.models import *
-# from S2.models import *
 import xadmin
 
 
@@ -55,7 +54,6 @@ class BranchLedgeAdmin(object):
         'Project_Num',
         'Project_Num_ST',
         'Project_Num_Suspend',
-        'Project_Num_Normal',
         'Project_Num_Warn',
         'Project_Num_Stop',
         'Stock_Num',
@@ -68,3 +66,78 @@ class BranchLedgeAdmin(object):
 
 
 xadmin.site.register(BranchLedge, BranchLedgeAdmin)
+
+
+class AdviserLedgeAdmin(object):
+    list_display = [
+        'InfoDate',
+        'Name',
+        'ID',
+        'Amounts_Total',
+        'Amounts_Avg',
+        'Project_Num',
+        'Project_Num_ST',
+        'Project_Num_Suspend',
+        'Project_Num_Warn',
+        'Project_Num_Stop',
+        'Stock_Num',
+        'Stock_Num_Suspend',
+        'Stock_Num_ST',
+        'Days_Settle_Max',
+        'Days_Settle_Avg',
+        'Days_Settle_Mid',
+        'Branch_Num',
+    ]
+
+
+xadmin.site.register(AdviserLedge, AdviserLedgeAdmin)
+
+
+class PosteriorLedgeAdmin(object):
+    list_display = [
+        'InfoDate',
+        'Name',
+        'ID',
+        'Amounts_Total',
+        'Amounts_Avg',
+        'Project_Num',
+        'Project_Num_ST',
+        'Project_Num_Suspend',
+        'Project_Num_Warn',
+        'Project_Num_Stop',
+        'Stock_Num',
+        'Stock_Num_Suspend',
+        'Stock_Num_ST',
+        'Days_Settle_Max',
+        'Days_Settle_Avg',
+        'Days_Settle_Mid',
+        'Branch_Num',
+    ]
+
+
+xadmin.site.register(PosteriorLedge, PosteriorLedgeAdmin)
+
+
+class GuarantorLedgeAdmin(object):
+    list_display = [
+        'InfoDate',
+        'Name',
+        'ID',
+        'Amounts_Total',
+        'Amounts_Avg',
+        'Project_Num',
+        'Project_Num_ST',
+        'Project_Num_Suspend',
+        'Project_Num_Warn',
+        'Project_Num_Stop',
+        'Stock_Num',
+        'Stock_Num_Suspend',
+        'Stock_Num_ST',
+        'Days_Settle_Max',
+        'Days_Settle_Avg',
+        'Days_Settle_Mid',
+        'Branch_Num',
+    ]
+
+
+xadmin.site.register(GuarantorLedge, GuarantorLedgeAdmin)

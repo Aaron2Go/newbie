@@ -38,7 +38,7 @@ class Project(models.Model):
 
 
 class GuarantorJournal(models.Model):
-    Project = models.ManyToManyField("Project", verbose_name='项目')
+    Project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='项目')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
     Name = models.CharField(max_length=20, verbose_name='名称')
     objects = models.Manager()
@@ -52,7 +52,7 @@ class GuarantorJournal(models.Model):
 
 
 class AdviserJournal(models.Model):
-    Project = models.ManyToManyField("Project", verbose_name='项目')
+    Project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='项目')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
     Name = models.CharField(max_length=20, verbose_name='名称')
     objects = models.Manager()
@@ -66,7 +66,7 @@ class AdviserJournal(models.Model):
 
 
 class PosteriorJournal(models.Model):
-    Project = models.ManyToManyField("Project", verbose_name='项目')
+    Project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='项目')
     ID = models.CharField(max_length=20, primary_key=True, unique=True, verbose_name='身份识别码')
     Name = models.CharField(max_length=20, verbose_name='名称')
     objects = models.Manager()
@@ -80,7 +80,7 @@ class PosteriorJournal(models.Model):
 
 
 class StockJournal(models.Model):
-    Project = models.ForeignKey(Project, related_name='StockJournal', on_delete=models.CASCADE, verbose_name='项目')
+    Project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='项目')
     InfoDate = models.DateField(verbose_name='口径日期')
     Code = models.CharField(max_length=10, verbose_name='证券代码')
     Name = models.CharField(max_length=50, verbose_name='证券简称')

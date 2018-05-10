@@ -1,21 +1,24 @@
-from S2.models import *
 from S1.models import *
 from django.utils.timezone import now
 import tushare as tu  # Tushare 用来获取股票行情信息
-from django.db.models import Sum, Avg, Max
+from django.db.models import Sum, Avg  # , Max
+
+
+def generate(infodate):
+    generate_stockledge(infodate)
+    generate_projectledge(infodate)
+    generate_branchledge(infodate)
+    generate_adviserledge(infodate)
+    # generate_posteriorledge(infodate)
+    # generate_guarantorledge(infodate)
 
 
 def generate_stockledge(infodate):
-    # 清除infodate对于的所有统计数据，以重算所有
     StockLedge.objects.filter(InfoDate=infodate).delete()
-    # 获取每行的首列
     item_list = StockJournal.objects.filter(InfoDate=infodate).distinct().values('Code')
     hist = tu.get_day_all(infodate)
-    # 对具体每行数据做操作
     for i in item_list:
-        # 筛选出某行对应的原始数据
         records = StockJournal.objects.filter(InfoDate=infodate, Code=i['Code'])
-        # 计算统计指标
         suspend_date = now().date()
         price = hist[hist['code'] == i['Code']]['price'].iloc[0]
 
@@ -25,7 +28,6 @@ def generate_stockledge(infodate):
         days_to_settle = holdings / turnover_rate / common_stock_outstanding / 1000000
         holdings_to_total = holdings / common_stock_outstanding / 10000000
         mv = price * holdings
-        # 写入记录到数据表
 
         print(now().date())
         print(price)
@@ -52,11 +54,8 @@ def generate_stockledge(infodate):
 
 
 def generate_projectledge(infodate):
-    # 清除infodate对于的所有统计数据，以重算所有
     ProjectLedge.objects.filter(InfoDate=infodate).delete()
-    # 获取每行的首列
     item_list = Project.objects.all()
-    # 对具体每行数据做操作
     for i in item_list:
         if StockJournal.objects.filter(Project=i, InfoDate=infodate).count() != 0:
             ProjectLedge.objects.get_or_create(
@@ -80,23 +79,20 @@ def generate_projectledge(infodate):
 
 
 def generate_branchledge(infodate):
-    # 清除infodate对于的所有统计数据，以重算所有
     BranchLedge.objects.filter(InfoDate=infodate).delete()
-    # 获取每行的首列
     item_list = Branch.objects.all()
-    # 对具体每行数据做操作
     for i in item_list:
         if ProjectLedge.objects.filter(Branch=i, InfoDate=infodate).aggregate(vl=Sum('Amount'))['vl'] is not None:
             BranchLedge.objects.get_or_create(
                 InfoDate=infodate,
                 Branch=i,
-                Amounts_Total=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate).aggregate(vl=Sum('Amount'))['vl'],
+                Amounts_Total=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate).aggregate(vl=Sum('Amount'))[
+                    'vl'],
                 Amounts_Avg=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate).aggregate(vl=Avg('Amount'))['vl'],
                 Project_Num=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate).count(),
                 Project_Num_ST=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate, Stock_Num_ST__gt=0).count(),
                 Project_Num_Suspend=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate,
                                                                 Stock_Num_Suspend__gt=0).count(),
-                Project_Num_Normal=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate).count(),
                 Project_Num_Warn=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate, Nav_Warn__lte=0).count(),
                 Project_Num_Stop=ProjectLedge.objects.filter(Branch=i, InfoDate=infodate, Nav_Stop__lte=0).count(),
                 Stock_Num=StockJournal.objects.filter(Project__Branch=i, InfoDate=infodate).distinct().values(
@@ -109,13 +105,45 @@ def generate_branchledge(infodate):
                 # StockJournal.objects.filter(Project__Branch=i, InfoDate=infodate).aggregate(vl=Max('Amount'))['vl'],
                 Days_Settle_Avg=0,
                 Days_Settle_Mid=0,
+                Adviser_Num=AdviserJournal.objects.filter(Project__Branch=i).distinct().values('ID').count(),
+                Posterior_Num=PosteriorJournal.objects.filter(Project__Branch=i).distinct().values('ID').count(),
+                Guarantor_Num=GuarantorJournal.objects.filter(Project__Branch=i).distinct().values('ID').count(),
             )
 
-def generate_ledge(infodate):
-    # 清除infodate对于的所有统计数据，以重算所有
-    StockLedge.objects.filter(InfoDate=infodate).delete()
-    # 获取每行的首列
-    item_list = StockJournal.objects.filter(InfoDate=infodate).distinct().values('Code')
-    # 对具体每行数据做操作
+
+def generate_adviserledge(infodate):
+    AdviserLedge.objects.filter(InfoDate=infodate).delete()
+    item_list = AdviserJournal.objects.distinct().values('ID')
     for i in item_list:
-        pass
+        if StockJournal.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate).count() > 0:
+            AdviserLedge.objects.get_or_create(
+                InfoDate=infodate,
+                ID=i['ID'],
+                Name=AdviserJournal.objects.filter(ID=i['ID']).values('Name').last()['Name'],
+                Amounts_Total=
+                ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate).aggregate(
+                    vl=Sum('Amount'))['vl'],
+                Amounts_Avg=
+                ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate).aggregate(
+                    vl=Avg('Amount'))['vl'],
+                Project_Num=ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate).count(),
+                Project_Num_ST=ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate,
+                                                           Stock_Num_ST__gt=0).count(),
+                Project_Num_Suspend=ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate,
+                                                                Stock_Num_Suspend__gt=0).count(),
+                Project_Num_Warn=ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate,
+                                                             Nav_Warn__lte=0).count(),
+                Project_Num_Stop=ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate,
+                                                             Nav_Stop__lte=0).count(),
+                Stock_Num=StockJournal.objects.filter(Project__adviserjournal__ID=i['ID'],
+                                                      InfoDate=infodate).distinct().values('Code').count(),
+                Stock_Num_Suspend=StockJournal.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate,
+                                                              Status='停牌').distinct().values('Code').count(),
+                Stock_Num_ST=StockJournal.objects.filter(Project__adviserjournal__ID=i['ID'], InfoDate=infodate,
+                                                         Name='%ST%').distinct().values('Code').count(),
+                Days_Settle_Max=0,
+                Days_Settle_Avg=0,
+                Days_Settle_Mid=0,
+                Branch_Num=ProjectLedge.objects.filter(Project__adviserjournal__ID=i['ID'],
+                                                       InfoDate=infodate).distinct().values('Branch').count(),
+            )
