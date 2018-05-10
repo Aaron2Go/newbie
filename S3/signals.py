@@ -14,7 +14,6 @@ def navfile_receiver(sender, instance, **kwargs):
     interpret_navfile(
         NavFile.objects.values('File').order_by('UploadTime').last()['File'],
         NavFile.objects.values('Project__ID').order_by('UploadTime').last()['Project__ID'],
-        NavFile.objects.values('InfoDate').order_by('UploadTime').last()['InfoDate'],
     )
 
 

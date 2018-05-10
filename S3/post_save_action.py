@@ -28,7 +28,7 @@ def format_field_status(s):
         return '停牌'
 
 
-def interpret_navfile(file_path, project, infodate):
+def interpret_navfile(file_path, project):
     df = pd.read_excel(file_path, sheet_name=0)
     print(df)
     # 单位净值

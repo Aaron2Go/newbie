@@ -38,7 +38,6 @@ xadmin.site.register(ProjectFile, ProjectFileAdmin)
 
 class NavFileAdmin(object):
     list_display = [
-        'InfoDate',
         'Project',
         'File',
         'UploadTime',
@@ -47,9 +46,6 @@ class NavFileAdmin(object):
     search_fields = [
         'Project',
         'Comments',
-    ]
-    list_filter = [
-        'InfoDate',
     ]
 
 

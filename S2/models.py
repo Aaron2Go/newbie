@@ -17,18 +17,16 @@ class Branch(models.Model):
 class Project(models.Model):
     ID = models.CharField(max_length=10, verbose_name='编号', primary_key=True)
     Name = models.CharField(max_length=50, verbose_name='项目名称')
-    Branch = models.ForeignKey("Branch", null=True, on_delete=models.CASCADE,
-                               verbose_name='经营机构')
-    Project_Type = (
-        ('直投类', '直投类'),
-        ('配资类', '配资类'),
-    )
+    Branch = models.ForeignKey("Branch", null=True, on_delete=models.CASCADE,verbose_name='经营机构')
+    Project_Type = (('直投类', '直投类'),('配资类', '配资类'),)
     Type = models.CharField(max_length=3, choices=Project_Type, verbose_name='类型')
     Approval_Form_Num = models.CharField(max_length=150, verbose_name='审批单号')
     Issue_Date = models.DateField(verbose_name='发行日期')
     Duration = models.IntegerField(verbose_name='期限')
     Amount = models.IntegerField(verbose_name='金额')
     Leverage_Ratio = models.DecimalField(verbose_name='杠杆率',max_digits=20,decimal_places=1)
+    # Warning_Line = models.DecimalField(verbose_name='预警线', max_digits=6,decimal_places=4)
+    # Stop_Line = models.DecimalField(verbose_name='止损线', max_digits=6,decimal_places=4)
     objects = models.Manager()
 
     def __str__(self):
@@ -37,55 +35,6 @@ class Project(models.Model):
     class Meta:
         verbose_name = "项目"
         verbose_name_plural = verbose_name
-
-    def stock_num(self):
-        return StockJournal.objects.filter(Project=self).count()
-
-    stock_num.short_description = "持有标的数量"
-
-    def stock_num_sup(self):
-        return StockJournal.objects.filter(Project=self, Status='停牌').count()
-
-    stock_num_sup.short_description = "停牌标的数量"
-
-    def stock_num_st(self):
-        return StockJournal.objects.filter(Project=self, Name='%ST%').count()
-
-    stock_num_st.short_description = "ST标的数量"
-
-    def latest_info_date(self):
-        return NavJournal.objects.filter(Project=self).latest('InfoDate').InfoDate
-
-    def last_info_date(self):
-        return NavJournal.objects.filter(Project=self).exclude(
-            InfoDate=NavJournal.objects.filter(Project=self).latest('InfoDate').InfoDate
-        ).latest('InfoDate').InfoDate
-
-    def first_info_date(self):
-        return NavJournal.objects.filter(Project=self).earliest('InfoDate').InfoDate
-
-    def total_info_dates(self):
-        return NavJournal.objects.filter(Project=self).count()
-
-    def latest_NavJournal(self):
-        return NavJournal.objects.filter(
-            Project=self
-        ).latest('InfoDate').NetValue
-
-    latest_NavJournal.short_description = "最新净值"
-
-    def last_NavJournal(self):
-        return NavJournal.objects.filter(
-            Project=self,
-            InfoDate=NavJournal.objects.filter(Project=self).exclude(
-                InfoDate=NavJournal.objects.filter(Project=self).latest('InfoDate').InfoDate
-            ).latest('InfoDate').InfoDate
-        ).last().NetValue
-
-    def first_NavJournal(self):
-        return NavJournal.objects.filter(
-            Project=self
-        ).earliest('InfoDate').NetValue
 
 
 class GuarantorJournal(models.Model):
@@ -157,7 +106,7 @@ class StockJournal(models.Model):
 class NavJournal(models.Model):
     Project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='项目')
     InfoDate = models.DateField(verbose_name='口径日期')
-    NetValue = models.DecimalField(verbose_name='净值', max_digits=20,decimal_places=4)
+    NetValue = models.DecimalField(verbose_name='净值', max_digits=6,decimal_places=4)
     objects = models.Manager()
 
     def __str__(self):
